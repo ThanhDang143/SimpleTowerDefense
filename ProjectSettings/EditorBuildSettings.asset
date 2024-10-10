@@ -6,17 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/PluginPackages/SSSystem/Scenes/SSEmpty.unity
-    guid: ef0246d6486ba4a62a69aec8c91a2af1
+    path: Assets/Scenes/SceneManager.unity
+    guid: ce031242ca950410190ba6fb4043ddd6
+  - enabled: 1
+    path: Assets/Scenes/PopupLose.unity
+    guid: 422f9c6464e51418c9320c5e1cde6f8c
   - enabled: 1
     path: Assets/Scenes/PopupPause.unity
     guid: 43707ace2360844f1badc989565c6988
   - enabled: 1
+    path: Assets/Scenes/PopupWin.unity
+    guid: 315f8a47722a24a449d1703466633134
+  - enabled: 1
     path: Assets/Scenes/SceneLoading.unity
     guid: 37d65bebdb94b41ed8bac41e72970134
-  - enabled: 1
-    path: Assets/Scenes/SceneManager.unity
-    guid: ce031242ca950410190ba6fb4043ddd6
   - enabled: 1
     path: Assets/Scenes/ScreenGame.unity
     guid: 2746c6e6e23864141a98fcbbd1c475a1
@@ -24,10 +27,7 @@ EditorBuildSettings:
     path: Assets/Scenes/ScreenHome.unity
     guid: 4989507b3a4364b99bae3bd180eb0ee3
   - enabled: 1
-    path: Assets/Scenes/PopupWin.unity
-    guid: 315f8a47722a24a449d1703466633134
-  - enabled: 1
-    path: Assets/Scenes/PopupLose.unity
-    guid: 422f9c6464e51418c9320c5e1cde6f8c
+    path: Assets/PluginPackages/SSSystem/Scenes/SSEmpty.unity
+    guid: ef0246d6486ba4a62a69aec8c91a2af1
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 59a3207ffb69a4126ab1ec6c44eb7628, type: 2}

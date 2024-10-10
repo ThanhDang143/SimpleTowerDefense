@@ -7,9 +7,6 @@ public class SceneManager : SSSceneManager
     {
         base.OnFirstSceneLoad();
 
-        // Initialize here!
-        Application.targetFrameRate = 60;
-
         // Load GameData
         DataManager.Instance.InitialData();
     }

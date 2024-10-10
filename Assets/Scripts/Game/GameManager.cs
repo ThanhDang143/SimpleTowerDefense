@@ -174,6 +174,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void OnWin()
     {
+        SetGameState(GameState.NONE);
         SSSceneManager.Instance.PopUp(PopupNames.WIN);
         curLevel = GetNextLevel();
 
@@ -187,6 +188,7 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void OnLose()
     {
+        SetGameState(GameState.NONE);
         SSSceneManager.Instance.PopUp(PopupNames.LOSE);
     }
 
@@ -477,7 +479,6 @@ public class GameManager : MonoSingleton<GameManager>
         }
         else // Win Game
         {
-            SetGameState(GameState.NONE);
             OnWin();
         }
     }
