@@ -233,6 +233,8 @@ public class GameManager : MonoSingleton<GameManager>
     {
         float curRes = GetResources(key);
         SetResources(key, curRes + value);
+
+        if (key == ResourcesKey.LEVEL_HP && value < 0) NotificationService.Instance.Post(GloblaConstants.Noti.ON_DECREASE_HP);
     }
 
     #endregion
@@ -267,20 +269,13 @@ public class GameManager : MonoSingleton<GameManager>
             Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             MapCell cell = GetCell(mousePos);
 
-            if (!IsCanPlaceTower()) return;
+            if (!IsCanPlaceTower(true)) return;
 
             TowerController towerInCell = cell.GetTower();
             Tower towerInfo = towerPreview.GetTowerInfo();
             // Place new tower  
             if (towerInCell == null)
             {
-                bool isEnoughCoin = GetResources(ResourcesKey.COIN) >= towerInfo.Upgrades[0].Price;
-                if (!isEnoughCoin)
-                {
-                    NotificationService.Instance.Post(GloblaConstants.Noti.NOT_ENOUGH_COIN);
-                    return;
-                }
-
                 AddressableManager.LoadAssetAsync<GameObject>(towerInfo.PrefabAddress, (result) =>
                 {
                     TowerController tower = Instantiate(result, cell.GetCellBG().transform).GetComponent<TowerController>();
@@ -293,13 +288,6 @@ public class GameManager : MonoSingleton<GameManager>
             // Upgrade tower
             else
             {
-                bool isEnoughCoin = GetResources(ResourcesKey.COIN) >= towerInfo.Upgrades[towerInCell.GetLevel() + 1].Price;
-                if (!isEnoughCoin)
-                {
-                    NotificationService.Instance.Post(GloblaConstants.Noti.NOT_ENOUGH_COIN);
-                    return;
-                }
-
                 towerInCell.Upgrade();
                 AddResources(ResourcesKey.COIN, -towerInfo.Upgrades[towerInCell.GetLevel()].Price);
             }
@@ -343,7 +331,7 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-    public bool IsCanPlaceTower()
+    public bool IsCanPlaceTower(bool pushNoti = false)
     {
         if (towerPreview == null) return false;
 
@@ -358,6 +346,8 @@ public class GameManager : MonoSingleton<GameManager>
         bool isEnoughCoin = GetResources(ResourcesKey.COIN) >= price;
         bool isCanPlaceInCell = cell.IsCanPlaceTower();
         bool isPreviewMatchCell = towerInCell == null ? true : towerInCell.GetTowerID() == towerPreview.GetTowerID();
+
+        if (pushNoti && !isEnoughCoin) NotificationService.Instance.Post(GloblaConstants.Noti.NOT_ENOUGH_COIN);
 
         return isEnoughCoin && isCanPlaceInCell && isPreviewMatchCell;
     }

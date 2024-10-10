@@ -27,6 +27,7 @@ Các lớp `TowerController`, `EnemyController`, `Projectile` trong project này
     - Sử dụng con lăn chuột để ZoomIn/ZoomOut map.
     - Chọn trụ cần đặt bằng cách chọn các nút trên màn hình. `Left Click` vào các cell trống để đặt trụ. `Left Click` và các cell có trụ cùng loại để nâng cấp trụ.
     - Chọn `X` ở góc dưới bên trái màn hình để huỷ chọn trụ.
+    - Chọn `C` ở góc dưới bên trái màn hình để cheat thêm tiền.
     - Để bán trụ `Right Click` vào các cell có trụ. Giá bán bằng 1/2 giá của trụ.
 - **Game chưa hỗ trợ save game**
 

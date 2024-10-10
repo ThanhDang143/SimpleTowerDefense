@@ -39,6 +39,7 @@ public class ScreenGame : SSController
         NotificationService.Instance.Add(GloblaConstants.Noti.ON_UPDATE_GAME_STATE, OnGameStateChanged);
         NotificationService.Instance.Add(GloblaConstants.Noti.NOT_ENOUGH_COIN, OnNotEnoughCoin);
         NotificationService.Instance.Add(GloblaConstants.Noti.ON_LOAD_NEXT_LEVEL, LoadTowerInLevel);
+        NotificationService.Instance.Add(GloblaConstants.Noti.ON_DECREASE_HP, OnDecreaseHP);
     }
 
     private void RemoveNoti()
@@ -47,6 +48,7 @@ public class ScreenGame : SSController
         NotificationService.Instance.Remove(GloblaConstants.Noti.ON_UPDATE_GAME_STATE, OnGameStateChanged);
         NotificationService.Instance.Remove(GloblaConstants.Noti.NOT_ENOUGH_COIN, OnNotEnoughCoin);
         NotificationService.Instance.Remove(GloblaConstants.Noti.ON_LOAD_NEXT_LEVEL, LoadTowerInLevel);
+        NotificationService.Instance.Remove(GloblaConstants.Noti.ON_DECREASE_HP, OnDecreaseHP);
     }
 
     private void LoadTowerInLevel()
@@ -82,7 +84,16 @@ public class ScreenGame : SSController
 
     private void OnNotEnoughCoin()
     {
-        txtCoin.DOShakeAnchorPos(0.5f, 10, 90);
+        txtCoin.DOComplete();
+        txtCoin.GetComponent<TextMeshProUGUI>().color = Color.red;
+        txtCoin.DOShakeAnchorPos(0.5f, 100, 100).OnComplete(() => { txtCoin.GetComponent<TextMeshProUGUI>().color = Color.white; });
+    }
+
+    private void OnDecreaseHP()
+    {
+        txtHealth.DOComplete();
+        txtHealth.GetComponent<TextMeshProUGUI>().color = Color.red;
+        txtHealth.DOShakeAnchorPos(0.5f, 100, 100).OnComplete(() => { txtHealth.GetComponent<TextMeshProUGUI>().color = Color.white; });
     }
 
     #region Buttons Aciton
@@ -99,6 +110,11 @@ public class ScreenGame : SSController
     public void OnBtnRemoveTowerPreviewClicked()
     {
         GameManager.Instance.OnRemoveTowerPreview();
+    }
+
+    public void OnBtnCheatsClicked()
+    {
+        GameManager.Instance.AddResources(ResourcesKey.COIN, 100);
     }
     #endregion
 }

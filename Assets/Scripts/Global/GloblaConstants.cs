@@ -11,6 +11,7 @@ public static class GloblaConstants
         public const string ON_UPDATE_GAME_STATE = "ON_UPDATE_GAME_STATE";
         public const string NOT_ENOUGH_COIN = "NOT_ENOUGH_COIN";
         public const string ON_LOAD_NEXT_LEVEL = "ON_LOAD_NEXT_LEVEL";
+        public const string ON_DECREASE_HP = "ON_DECREASE_HP";
     }
 
 }
