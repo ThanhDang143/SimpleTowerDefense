@@ -1,0 +1,73 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-785961286365014205
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0cef8d0045424afb8f94c1e6798e096, type: 3}
+  m_Name: TOWER003
+  m_EditorClassIdentifier: 
+  serializedRow: '{"PrefabAddress":"Tower003","Stats":{"DMG":30.0,"ATK_RANGE":50.0,"ATK_SPEED":0.5},"Upgrades":[{"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/tanks.png[tanks_6]","Asset":{"$type":"ref","Value":0}},"Price":100,"PowerMultiplier":1.0,"ProjectileAddress":"Projectile"},{"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/tanks.png[tanks_7]","Asset":{"$type":"ref","Value":1}},"Price":200,"PowerMultiplier":1.5,"ProjectileAddress":"Projectile"},{"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/tanks.png[tanks_8]","Asset":{"$type":"ref","Value":2}},"Price":300,"PowerMultiplier":2.0,"ProjectileAddress":"Projectile"}],"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/tanks.png[tanks_6]","Asset":{"$type":"ref","Value":0}},"Name":"Tower
+    003","Desc":"Red Tower","Id":"TOWER003"}'
+  references:
+  - {fileID: -40357752, guid: ad40190821c984ebb883dad64514cf61, type: 3}
+  - {fileID: -1155255761, guid: ad40190821c984ebb883dad64514cf61, type: 3}
+  - {fileID: -246738396, guid: ad40190821c984ebb883dad64514cf61, type: 3}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c9f16a815c438f9dbeaa7d721117d9, type: 3}
+  m_Name: Towers
+  m_EditorClassIdentifier: 
+  rows:
+  - {fileID: 143760334030184217}
+  - {fileID: 8392585621737570415}
+  - {fileID: -785961286365014205}
+  typeInfo: BakingSheetImpl.Tower
+--- !u!114 &143760334030184217
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0cef8d0045424afb8f94c1e6798e096, type: 3}
+  m_Name: TOWER001
+  m_EditorClassIdentifier: 
+  serializedRow: '{"PrefabAddress":"Tower001","Stats":{"DMG":10.0,"ATK_RANGE":30.0,"ATK_SPEED":1.0},"Upgrades":[{"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/tanks.png[tanks_0]","Asset":{"$type":"ref","Value":0}},"Price":100,"PowerMultiplier":1.0,"ProjectileAddress":"Projectile"},{"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/tanks.png[tanks_1]","Asset":{"$type":"ref","Value":1}},"Price":200,"PowerMultiplier":1.5,"ProjectileAddress":"Projectile"},{"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/tanks.png[tanks_2]","Asset":{"$type":"ref","Value":2}},"Price":300,"PowerMultiplier":2.0,"ProjectileAddress":"Projectile"}],"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/tanks.png[tanks_0]","Asset":{"$type":"ref","Value":0}},"Name":"Tower
+    001","Desc":"Green Tower","Id":"TOWER001"}'
+  references:
+  - {fileID: 1735531173, guid: ad40190821c984ebb883dad64514cf61, type: 3}
+  - {fileID: 2097524494, guid: ad40190821c984ebb883dad64514cf61, type: 3}
+  - {fileID: -767454733, guid: ad40190821c984ebb883dad64514cf61, type: 3}
+--- !u!114 &8392585621737570415
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0cef8d0045424afb8f94c1e6798e096, type: 3}
+  m_Name: TOWER002
+  m_EditorClassIdentifier: 
+  serializedRow: '{"PrefabAddress":"Tower002","Stats":{"DMG":20.0,"ATK_RANGE":40.0,"ATK_SPEED":0.75},"Upgrades":[{"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/tanks.png[tanks_3]","Asset":{"$type":"ref","Value":0}},"Price":100,"PowerMultiplier":1.0,"ProjectileAddress":"Projectile"},{"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/tanks.png[tanks_4]","Asset":{"$type":"ref","Value":1}},"Price":200,"PowerMultiplier":1.5,"ProjectileAddress":"Projectile"},{"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/tanks.png[tanks_5]","Asset":{"$type":"ref","Value":2}},"Price":300,"PowerMultiplier":2.0,"ProjectileAddress":"Projectile"}],"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/tanks.png[tanks_3]","Asset":{"$type":"ref","Value":0}},"Name":"Tower
+    002","Desc":"Blue Tower","Id":"TOWER002"}'
+  references:
+  - {fileID: 1177584958, guid: ad40190821c984ebb883dad64514cf61, type: 3}
+  - {fileID: -1931328974, guid: ad40190821c984ebb883dad64514cf61, type: 3}
+  - {fileID: -1530533021, guid: ad40190821c984ebb883dad64514cf61, type: 3}

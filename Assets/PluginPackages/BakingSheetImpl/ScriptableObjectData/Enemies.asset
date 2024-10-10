@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73c9f16a815c438f9dbeaa7d721117d9, type: 3}
+  m_Name: Enemies
+  m_EditorClassIdentifier: 
+  rows:
+  - {fileID: 7313040167012310898}
+  - {fileID: 6946202220351574107}
+  - {fileID: 5578027429483615329}
+  typeInfo: BakingSheetImpl.Enemy
+--- !u!114 &5578027429483615329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0cef8d0045424afb8f94c1e6798e096, type: 3}
+  m_Name: MON003
+  m_EditorClassIdentifier: 
+  serializedRow: '{"PrefabAddress":"Monster003","Reward":30,"Stats":{"DMG":30.0,"HP":400.0,"MOVE_SPEED":30.0},"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/Monster.png[Monster_2]","Asset":{"$type":"ref","Value":0}},"Name":"P","Desc":"Pink","Id":"MON003"}'
+  references:
+  - {fileID: 886490559, guid: 1a22343382bad4015b513a6ce3a76dc7, type: 3}
+--- !u!114 &6946202220351574107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0cef8d0045424afb8f94c1e6798e096, type: 3}
+  m_Name: MON002
+  m_EditorClassIdentifier: 
+  serializedRow: '{"PrefabAddress":"Monster002","Reward":20,"Stats":{"DMG":20.0,"HP":300.0,"MOVE_SPEED":20.0},"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/Monster.png[Monster_0]","Asset":{"$type":"ref","Value":0}},"Name":"B","Desc":"Blue","Id":"MON002"}'
+  references:
+  - {fileID: -285437953, guid: 1a22343382bad4015b513a6ce3a76dc7, type: 3}
+--- !u!114 &7313040167012310898
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0cef8d0045424afb8f94c1e6798e096, type: 3}
+  m_Name: MON001
+  m_EditorClassIdentifier: 
+  serializedRow: '{"PrefabAddress":"Monster001","Reward":10,"Stats":{"DMG":10.0,"HP":200.0,"MOVE_SPEED":10.0},"Icon":{"$type":"direct","RawValue":"_Assets/Sprites/Monster.png[Monster_1]","Asset":{"$type":"ref","Value":0}},"Name":"W","Desc":"White","Id":"MON001"}'
+  references:
+  - {fileID: -1941099385, guid: 1a22343382bad4015b513a6ce3a76dc7, type: 3}
