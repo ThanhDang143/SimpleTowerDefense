@@ -2,7 +2,7 @@ public static class GloblaConstants
 {
     public static class Default
     {
-        public const string LEVEL = "LVL001";
+        public const string LEVEL = "LVL002";
     }
 
     public static class Noti
