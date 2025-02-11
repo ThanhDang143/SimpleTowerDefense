@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class MapCell
@@ -23,13 +24,23 @@ public class MapCell
         bgView.Setup(grid.GetCellSize(), Utilities.ChooseColor(cellType));
 
         // Check special cell
-        if (cellType == MapCellType.START_POINT) GameManager.Instance.SetStartCell(this);
-        if (cellType == MapCellType.END_POINT) GameManager.Instance.SetEndCell(this);
+        if (cellType == MapCellType.START_POINT) GameManager.Instance.AddStartCell(this);
+        if (cellType == MapCellType.END_POINT) GameManager.Instance.AddEndCell(this);
     }
 
-    public Vector3 GetWorldPosition()
+    public Vector3 GetWorldPos()
     {
         return grid.GetWorldPosition(posInGrid.x, posInGrid.y) + new Vector3(grid.GetCellSize(), grid.GetCellSize()) * 0.5f;
+    }
+
+    public Vector2Int GetGridPos()
+    {
+        return posInGrid;
+    }
+
+    public float GetCellSize()
+    {
+        return grid.GetCellSize();
     }
 
     public MapCellType GetCellType()
@@ -50,6 +61,12 @@ public class MapCell
         return bgView;
     }
 
+    public void SetTempBGColor(Color color)
+    {
+        bgView.SetColor(color);
+        DOVirtual.DelayedCall(0.5f, () => { bgView.SetColor(Utilities.ChooseColor(cellType)); });
+    }
+
     public bool IsCanMove()
     {
         return cellType == MapCellType.ROAD || cellType == MapCellType.START_POINT || cellType == MapCellType.END_POINT;
@@ -68,7 +85,7 @@ public class MapCell
     public void RemoveTower()
     {
         if (tower == null) return;
-        
+
         tower.OnSell();
         tower = null;
     }
@@ -78,10 +95,17 @@ public class MapCell
         return tower;
     }
 
-
-
     public override string ToString()
     {
         return cellType.ToString() + "\n" + posInGrid;
     }
+
+    #region Path Finding
+
+    public bool IsObstacle()
+    {
+        return cellType == MapCellType.ROAD || cellType == MapCellType.BLOCK;
+    }
+
+    #endregion
 }

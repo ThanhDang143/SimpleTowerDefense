@@ -1,11 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
+    #region TowerDefense
     [Space]
     [SerializeField] private Image imgHealth;
 
@@ -13,15 +15,13 @@ public class EnemyController : MonoBehaviour
     private Dictionary<Stat, float> curStats;
     private int reward;
 
-    private MapCell preCell;
-    private MapCell nextCell;
+    MapCell nextCell;
     private float tempHP;
 
     public void Setup(EnemyInWave enemyData)
     {
         GameManager.Instance.AddEnemy(this);
-        preCell = GameManager.Instance.GetStartCell();
-        nextCell = GameManager.Instance.GetStartCell();
+        nextCell = movePath[moveIndex];
 
         reward = enemyData.Enemy.Ref.Reward;
         baseStats = GameManager.Instance.ScaleStats(enemyData.Enemy.Ref.Stats, enemyData.ScaleIndex);
@@ -60,14 +60,14 @@ public class EnemyController : MonoBehaviour
     {
         if (nextCell == null) return;
 
-        float distance = Vector3.Distance(transform.position, nextCell.GetWorldPosition());
+        float distance = Vector3.Distance(transform.position, nextCell.GetWorldPos());
         if (distance < 0.1f)
         {
             OnReachTarget();
         }
         else
         {
-            transform.position = Vector3.MoveTowards(transform.position, nextCell.GetWorldPosition(), Time.deltaTime * GetStat(Stat.MOVE_SPEED));
+            transform.position = Vector3.MoveTowards(transform.position, nextCell.GetWorldPos(), Time.deltaTime * GetStat(Stat.MOVE_SPEED));
         }
     }
 
@@ -119,38 +119,18 @@ public class EnemyController : MonoBehaviour
         return GameManager.Instance.GetCell(transform.position);
     }
 
-    private MapCell FindNewTarget()
-    {
-        MapCell curCell = GetCurCell();
-        curCell.GetCellAround(out MapCell up, out MapCell right, out MapCell down, out MapCell left);
-
-        if (up != null && up.IsCanMove() && up != preCell) return up;
-        if (right != null && right.IsCanMove() && right != preCell) return right;
-        if (down != null && down.IsCanMove() && down != preCell) return down;
-        if (left != null && left.IsCanMove() && left != preCell) return left;
-
-        return null;
-    }
-
     private void OnReachTarget()
     {
-        MapCell newCell = FindNewTarget();
+        moveIndex++;
 
         // Reach end point
-        if (newCell == null && GetCurCell().GetCellType() == MapCellType.END_POINT)
+        if (moveIndex >= movePath.Count)
         {
             OnReachEndPoint();
             return;
         }
 
-        if (newCell == null && GetCurCell().GetCellType() != MapCellType.END_POINT)
-        {
-            Debug.Log("Can't find new target. Please check your map!");
-            return;
-        }
-
-        preCell = nextCell;
-        nextCell = newCell;
+        nextCell = movePath[moveIndex];
     }
 
     public void OnReachEndPoint()
@@ -158,4 +138,70 @@ public class EnemyController : MonoBehaviour
         GameManager.Instance.AddResources(ResourcesKey.LEVEL_HP, -GetStat(Stat.DMG));
         OnDead();
     }
+    #endregion
+
+    #region PathFinding
+
+    private List<MapCell> movePath;
+    private int moveIndex = 0;
+
+    public void Setup(EnemyInWave enemyData, MapCell startCell, MapCell endCell)
+    {
+        moveIndex = 0;
+        movePath = PathFinding.Instance.FindPath(startCell, endCell);
+        if (movePath == null)
+        {
+            Debug.Log("<color=red>Cannot find way to target</color>");
+            OnDead();
+            return;
+        }
+
+        if (!IsValidPath())
+        {
+            if (GameManager.Instance.IsCanShowDebug())
+            {
+                foreach (MapCell mapCell in movePath)
+                {
+                    mapCell.SetTempBGColor(Color.red);
+                }
+            }
+            OnDead();
+            return;
+        }
+        else
+        {
+            if (GameManager.Instance.IsCanShowDebug())
+            {
+                foreach (MapCell mapCell in movePath)
+                {
+                    mapCell.SetTempBGColor(Color.green);
+                }
+            }
+        }
+
+        EditorApplication.isPaused = true;
+        Setup(enemyData);
+    }
+
+    public bool IsValidPath()
+    {
+        if (movePath == null || movePath.Count == 0) return false;
+
+        if (movePath.Count < 2) return true;
+
+        int sectionCount = 0;
+        for (int i = 0; i < movePath.Count - 2; i++)
+        {
+            MapCell curCell = movePath[i];
+            MapCell nextCell = movePath[i + 2];
+            if (curCell.GetGridPos().x != nextCell.GetGridPos().x && curCell.GetGridPos().y != nextCell.GetGridPos().y)
+            {
+                sectionCount++;
+            }
+        }
+
+        return sectionCount <= 2;
+    }
+
+    #endregion
 }

@@ -25,15 +25,16 @@ public class EnemySpawner : MonoBehaviour
                 enemies[i].SpawnCD = enemies[i].baseData.SpawnRate;
                 enemies[i].SpawnRemain--;
 
-                Vector3 ePos = GameManager.Instance.GetStartCell().GetWorldPosition();
-                GameObject enemy = Instantiate(enemies[i].Prefab, ePos, Quaternion.identity, GameManager.Instance.GetGameContainer());
+                MapCell eStartCell = GameManager.Instance.GetStartCell();
+                MapCell eEndCell = GameManager.Instance.GetEndCell();
+                GameObject enemy = Instantiate(enemies[i].Prefab, eStartCell.GetWorldPos(), Quaternion.identity, GameManager.Instance.GetGameContainer());
                 if (enemy.TryGetComponent(out EnemyController controller))
                 {
-                    controller.Setup(enemies[i].baseData);
+                    controller.Setup(enemies[i].baseData, eStartCell, eEndCell);
                 }
                 else
                 {
-                    enemy.AddComponent<EnemyController>().Setup(enemies[i].baseData);
+                    enemy.AddComponent<EnemyController>().Setup(enemies[i].baseData, eStartCell, eEndCell);
                 }
             }
         }

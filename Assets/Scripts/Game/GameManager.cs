@@ -25,8 +25,8 @@ public class GameManager : MonoSingleton<GameManager>
     private string curLevel = GloblaConstants.Default.LEVEL;
     private Level levelData;
     private EnemySpawner enemySpawner;
-    private MapCell Start_Cell;
-    private MapCell End_Cell;
+    private List<MapCell> StartCells;
+    private List<MapCell> EndCells;
     private int curWave = 0;
     private List<EnemyController> enemies;
     private List<TowerController> towers;
@@ -71,6 +71,8 @@ public class GameManager : MonoSingleton<GameManager>
         grid = null;
         levelData = null;
         enemySpawner = null;
+        StartCells = new List<MapCell>();
+        EndCells = new List<MapCell>();
         SetCurWave(0);
 
         Utilities.ClearChildren(GetGameContainer());
@@ -85,6 +87,26 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K))
+        {
+            N x = new N
+            {
+                a = 0
+            };
+            Test1(x);
+            Debug.Log(x.a);
+        }
+
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            N x = new N
+            {
+                a = 0
+            };
+            Test2(ref x);
+            Debug.Log(x.a);
+        }
+
         if (GetGameState() != GameState.PLAYING && GetGameState() != GameState.PREPARE) return;
 
         if (cameraController != null) cameraController.ManualUpdate();
@@ -100,6 +122,21 @@ public class GameManager : MonoSingleton<GameManager>
             UpdateEnemies();
             UpdateTowers();
         }
+    }
+
+    private void Test1(N input)
+    {
+        input.a = 1;
+    }
+
+    private void Test2(ref N input)
+    {
+        input.a = 1;
+    }
+
+    public class N
+    {
+        public int a;
     }
 
     private void UpdateEnemies()
@@ -513,17 +550,19 @@ public class GameManager : MonoSingleton<GameManager>
 
     public MapCell GetStartCell()
     {
-        return Start_Cell;
+        int ran = Random.Range(0, StartCells.Count);
+        return StartCells[ran];
     }
 
-    public void SetStartCell(MapCell cell)
+    public void AddStartCell(MapCell cell)
     {
-        Start_Cell = cell;
+        if (!StartCells.Contains(cell)) StartCells.Add(cell);
     }
 
     public MapCell GetEndCell()
     {
-        return End_Cell;
+        int ran = Random.Range(0, EndCells.Count);
+        return EndCells[ran];
     }
 
     public MapCell GetCell(int x, int y)
@@ -548,9 +587,9 @@ public class GameManager : MonoSingleton<GameManager>
         return grid.GetValue(worldPos);
     }
 
-    public void SetEndCell(MapCell cell)
+    public void AddEndCell(MapCell cell)
     {
-        End_Cell = cell;
+        if (!EndCells.Contains(cell)) EndCells.Add(cell);
     }
 
     public Vector3 GetWorldPosition(int x, int y)

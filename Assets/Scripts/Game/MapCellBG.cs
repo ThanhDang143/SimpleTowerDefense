@@ -10,6 +10,11 @@ public class MapCellBG : MonoBehaviour
     public void Setup(float size, Color color)
     {
         transform.localScale = Vector3.one * size;
+        SetColor(color);
+    }
+
+    public void SetColor(Color color)
+    {
         spriteRenderer.color = color;
     }
 }
